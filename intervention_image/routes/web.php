@@ -1,5 +1,7 @@
 <?php
 
+//http://localhost/mis_archivos/intervention_image_git/intervention_image/public/
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +16,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('guardar', 'misControladores\guardarArchivos@guardarArchivo_GET');
+
+
+Route::post('recibir_datos', 'misControladores\guardarArchivos@guardarArchivo_POST')->name('datos_recibidos');
+
+Route::get('eliminar', 'misControladores\guardarArchivos@eliminar');
