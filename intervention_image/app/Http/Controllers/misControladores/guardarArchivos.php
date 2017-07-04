@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class guardarArchivos extends Controller
 {
@@ -23,12 +24,32 @@ class guardarArchivos extends Controller
 
     }
 
+    public function ImageController($medida, $image){
+    	
+    	$nombre_foto = 'img_' . $medida . '.png';
+
+    	$path = public_path('storage/mis_fotos/'); 
+    	$file = public_path('storage/mis_fotos/img1.png');   	
+    	
+    	$image = Image::make($file);
+    	$image->fit($medida, $medida);
+    	$image->save($path . $nombre_foto);
+
+    	
+
+    	return $image->response();
+
+    	return base_path();
+    }
+
     public function eliminar(){
+    	Storage::disk('public')->deleteDirectory('mis_fotos');
+    	return '<h1>imagen eliminada</h1>';
+    }
 
-    	$ruta = 'mis_fotos/7GM3oGfHYnU8FKlYFZncAcp7dlfy83TdmaDk9w0p.png';
+    public function listar(){
+    	$lista = Storage::disk('public')->allFiles('imagenes');
 
-    	Storage::disk('public')->delete($ruta);
-
-    	return 'Archivo eliminado exitosamente';
+    	return $lista;
     }
 }

@@ -22,4 +22,8 @@ Route::get('guardar', 'misControladores\guardarArchivos@guardarArchivo_GET');
 
 Route::post('recibir_datos', 'misControladores\guardarArchivos@guardarArchivo_POST')->name('datos_recibidos');
 
+Route::get('/upload/{medida}/{image}','misControladores\guardarArchivos@ImageController');
+
 Route::get('eliminar', 'misControladores\guardarArchivos@eliminar');
+
+Route::get('lista', 'misControladores\guardarArchivos@listar');
